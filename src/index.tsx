@@ -3,18 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './containers/app/App';
 import { ThemeProvider } from '@mui/material/styles';
+import { Provider } from 'react-redux';
+import { store } from './store';
 import theme from './theme';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import { SnackbarProvider } from 'notistack';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider autoHideDuration={5000} maxSnack={3}>
+          <App />
+        </SnackbarProvider>
+      </ThemeProvider>
+    </Provider>
   </BrowserRouter>,
 );
 
